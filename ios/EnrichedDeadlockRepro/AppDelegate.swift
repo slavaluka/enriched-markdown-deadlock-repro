@@ -15,7 +15,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil
   ) -> Bool {
     let delegate = ReactNativeDelegate()
-    let factory = RCTReactNativeFactory(delegate: delegate)
+    // Experimental release level enables preventShadowTreeCommitExhaustion,
+    // whose locked-commit fallback is required for the deadlock (README).
+    let factory = RCTReactNativeFactory(delegate: delegate, releaseLevel: RCTReleaseLevel.Experimental)
     delegate.dependencyProvider = RCTAppDependencyProvider()
 
     reactNativeDelegate = delegate
